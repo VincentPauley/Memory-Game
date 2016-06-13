@@ -27,6 +27,25 @@ $('.card').on('click', function() {
         selectedCardCount += 1;
     }
   }
-
+  handleSelectedCount();
+  // no need for else logic, cannot select more than 2, selected ones will be dealth with
   console.log(selectedCardCount);
 });
+
+
+function handleSelectedCount() {
+  if(selectedCardCount == 2) {
+    selectedCardCount = 0;
+    checkMatch();
+  }
+}
+
+/* no logic here yet, but eventually will check for matches */
+function checkMatch() {
+  setTimeout(clearCards, 1000);
+}
+
+/* flip all cards back over */
+function clearCards() {
+  $('.card').removeClass('selected-card');
+}
