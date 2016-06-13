@@ -47,8 +47,6 @@ console.log(pairs);
 console.log(numberArray.length);
 
 
-
-
 /* place all 24 cards on screen */
 var cardCount = 24;
 
@@ -61,8 +59,19 @@ for(i=0;i<cardCount;i++) {
   }
 }
 
+
+
+// the array 'pairs' now contains 12 unique pairs, and the cards on screen. assign each card a unique value
+var cardPairings = {
+
+}
+
+  // perhaps create an array for current matches, then check equlity between other arrays in pairs
+
 /* click handler for selected cards */
 $('.card').on('click', function() {
+
+
 
   /* only two cards can be selected */
   if(selectedCardCount < 2) {
@@ -74,6 +83,10 @@ $('.card').on('click', function() {
         selectedCardCount += 1;
     }
   }
+  /* Put card Number selected in variable */
+  var cardNumber = $(this).attr('id').substr(5);
+  console.log('Selected Card: ' + cardNumber);
+
   handleSelectedCount();
   // no need for else logic, cannot select more than 2, selected ones will be dealth with
   console.log(selectedCardCount);
