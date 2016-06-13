@@ -2,6 +2,7 @@
 body {
   margin: 0;
   padding: 0;
+  text-align: center; /* center the playing cards */
 }
 #score-area {
   padding: 30px;
@@ -10,8 +11,8 @@ body {
 #play-area {
   padding: 20px;
   background-color: skyblue;
-  max-width: 1000px;
   margin: auto;
+  display: inline-block;
 }
 
 /* card stuff */
