@@ -68,10 +68,17 @@ var cardPairings = {
 
   // perhaps create an array for current matches, then check equlity between other arrays in pairs
 
+var currentPairAttempt = [];
+
 /* click handler for selected cards */
 $('.card').on('click', function() {
 
+  /* Put card Number selected in variable */
+  var cardNumber = $(this).attr('id').substr(5);
+  console.log('Selected Card: ' + cardNumber);
 
+  /* push selections into an array */
+  currentPairAttempt.push(cardNumber);
 
   /* only two cards can be selected */
   if(selectedCardCount < 2) {
@@ -83,9 +90,7 @@ $('.card').on('click', function() {
         selectedCardCount += 1;
     }
   }
-  /* Put card Number selected in variable */
-  var cardNumber = $(this).attr('id').substr(5);
-  console.log('Selected Card: ' + cardNumber);
+
 
   handleSelectedCount();
   // no need for else logic, cannot select more than 2, selected ones will be dealth with
@@ -95,6 +100,8 @@ $('.card').on('click', function() {
 
 function handleSelectedCount() {
   if(selectedCardCount == 2) {
+    /* log out value of array */
+    console.log(currentPairAttempt);
     selectedCardCount = 0;
     checkMatch();
   }
