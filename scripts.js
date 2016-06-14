@@ -102,7 +102,8 @@ function checkCurrentSelections() {
 
     /* check attempt pair against the matches array */
     for(i=0;i<pairs.length;i++) {
-      var match = false;
+      var match = false,
+          matchCase = 0;
       /* pull numbers out of each actual pair */
       var firstActual = pairs[i][0],
           secondActual = pairs[i][1];
@@ -111,6 +112,7 @@ function checkCurrentSelections() {
         /* We have a match! */
         console.log('pair ' + i + ' is a match!!!');
         match = true;
+        matchCase = i;
         break;
       } else {
         /* not a match */
@@ -118,7 +120,7 @@ function checkCurrentSelections() {
     }
     /* call appropriate function weather the selection was correct or not */
     if(match) {
-      handleMatch();
+      handleMatch(matchCase);
     } else {
       handleNoMatch();
     }
@@ -126,21 +128,25 @@ function checkCurrentSelections() {
   }
 }
 
-function handleMatch() {
-  console.log('MATCH!!!');
-  checkMatch();
+function handleMatch(matchingPair) {
+  console.log('MATCH!!! ' + matchingPair + ' is a match!');
+  /* remove matching pair from pairs array */
+  pairs.splice(matchingPair, 1);
+  /* log out the pairs array for testing */
+  console.log(pairs);
+  reset();
 }
 
 function handleNoMatch() {
   console.log('no match :(');
-  checkMatch();
+  reset();
 }
 
 
 
 
 /* no logic here yet, but eventually will check for matches */
-function checkMatch() {
+function reset() {
   console.log('current match attempt: ' + currentPairAttempt);
   // clear selected pair array
   currentPairAttempt = [];
