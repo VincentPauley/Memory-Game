@@ -27,12 +27,27 @@ body {
   display: inline-block;
 }
 
+.card > p {
+  position: relative;
+  top: 16%;
+  font-size: 30px;
+  opacity: 0;
+}
+
 .selected-card {
   background-color: #FFF;
   border: 2px solid green;
 }
 
+.selected-card > p {
+  opacity: 1;
+}
+
 .matched-card {
   background-color: #7FFF00;
   border: 2px solid #49E20E;
+}
+
+.matched-card > p {
+  opacity: 1;
 }

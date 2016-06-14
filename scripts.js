@@ -59,15 +59,20 @@ for(i=0;i<cardCount;i++) {
   }
 }
 
+/* put numbers into card pairings */
+for(i=0;i<pairs.length;i++) {
+  var firstOfPair = pairs[i][0],
+      secondOfPair = pairs[i][1];
 
-
-// the array 'pairs' now contains 12 unique pairs, and the cards on screen. assign each card a unique value
-var cardPairings = {
-
+  $('#card-' + firstOfPair).append('<p>' + (i + 1) + '</p>');
+  $('#card-' + secondOfPair).append('<p>' + (i + 1) + '</p>');
 }
 
-  // perhaps create an array for current matches, then check equlity between other arrays in pairs
+/* -----------------------------------------
+ locic for user actions
+ ---------------------- */
 
+/* stores the cards currently selected by player, 2 cards max */
 var currentPairAttempt = [];
 
 /* click handler for selected cards */
@@ -165,3 +170,9 @@ function reset() {
 function clearCards() {
   $('.card').removeClass('selected-card');
 }
+
+/* OPEN ITEMS
+
+- game-breaking bug where you can click more than two items while the check match is running, it screws everything up.  Need to make items unclickable!
+
+*/
