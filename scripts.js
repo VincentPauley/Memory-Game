@@ -77,9 +77,6 @@ $('.card').on('click', function() {
   var cardNumber = $(this).attr('id').substr(5);
   console.log('Selected Card: ' + cardNumber);
 
-  /* push selections into an array */
-  currentPairAttempt.push(cardNumber);
-
   /* only two cards can be selected */
   if(selectedCardCount < 2) {
     /* check and ensure that card is not already selected */
@@ -87,21 +84,19 @@ $('.card').on('click', function() {
       alert('this card is already selected!');
     } else {
         $(this).addClass('selected-card');
-        selectedCardCount += 1;
+        selectedCardCount += 1; // increment card count
+        // push selection into array
+        currentPairAttempt.push(cardNumber);
     }
   }
-
-
   handleSelectedCount();
   // no need for else logic, cannot select more than 2, selected ones will be dealth with
-  console.log(selectedCardCount);
 });
 
 
 function handleSelectedCount() {
   if(selectedCardCount == 2) {
     /* log out value of array */
-    console.log(currentPairAttempt);
     selectedCardCount = 0;
     checkMatch();
   }
@@ -109,6 +104,10 @@ function handleSelectedCount() {
 
 /* no logic here yet, but eventually will check for matches */
 function checkMatch() {
+  console.log('current match attempt: ' + currentPairAttempt);
+  // clear selected pair array
+  currentPairAttempt = [];
+  // flip cards back over
   setTimeout(clearCards, 1000);
 }
 
