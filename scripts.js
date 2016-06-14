@@ -72,25 +72,25 @@ var currentPairAttempt = [];
 
 /* click handler for selected cards */
 $('.card').on('click', function() {
+  /* ensure card has is not already part of a matched set */
+  if(!$(this).hasClass('matched-card')) {
+    /* Put card Number selected in variable */
+    var cardNumber = $(this).attr('id').substr(5);
 
-  /* Put card Number selected in variable */
-  var cardNumber = $(this).attr('id').substr(5);
-  console.log('Selected Card: ' + cardNumber);
-
-  /* only two cards can be selected */
-  if(selectedCardCount < 2) {
-    /* check and ensure that card is not already selected */
-    if($(this).hasClass('selected-card')) {
-      alert('this card is already selected!');
-    } else {
-        $(this).addClass('selected-card');
-        selectedCardCount += 1; // increment card count
-        // push selection into array
-        currentPairAttempt.push(cardNumber);
+    /* only two cards can be selected */
+    if(selectedCardCount < 2) {
+      /* check and ensure that card is not already selected */
+      if($(this).hasClass('selected-card')) {
+        alert('this card is already selected!');
+      } else {
+          $(this).addClass('selected-card');
+          selectedCardCount += 1; // increment card count
+          // push selection into array
+          currentPairAttempt.push(cardNumber);
+      }
     }
+    checkCurrentSelections();
   }
-  checkCurrentSelections();
-  // no need for else logic, cannot select more than 2, selected ones will be dealth with
 });
 
 
@@ -120,7 +120,7 @@ function checkCurrentSelections() {
     }
     /* call appropriate function weather the selection was correct or not */
     if(match) {
-      handleMatch(matchCase);
+      handleMatch(matchCase, currentPairAttempt);
     } else {
       handleNoMatch();
     }
@@ -128,12 +128,19 @@ function checkCurrentSelections() {
   }
 }
 
-function handleMatch(matchingPair) {
+function handleMatch(matchingPair, matchingPairNumbers) {
   console.log('MATCH!!! ' + matchingPair + ' is a match!');
+
+  var cardOne = 'card-' + matchingPairNumbers[0],
+      cardTwo = 'card-' + matchingPairNumbers[1]
+
+  $('#' + cardOne).addClass('matched-card');
+  $('#' + cardTwo).addClass('matched-card');
+
+
   /* remove matching pair from pairs array */
   pairs.splice(matchingPair, 1);
-  /* log out the pairs array for testing */
-  console.log(pairs);
+
   reset();
 }
 
