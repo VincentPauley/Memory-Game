@@ -89,12 +89,12 @@ $('.card').on('click', function() {
         currentPairAttempt.push(cardNumber);
     }
   }
-  handleSelectedCount();
+  checkCurrentSelections();
   // no need for else logic, cannot select more than 2, selected ones will be dealth with
 });
 
 
-function handleSelectedCount() {
+function checkCurrentSelections() {
   if(selectedCardCount == 2) {
     /* pull out numbers from the attempt array */
     var attemptFirstSelection = currentPairAttempt[0],
@@ -102,33 +102,46 @@ function handleSelectedCount() {
 
     /* check attempt pair against the matches array */
     for(i=0;i<pairs.length;i++) {
+      var match = false;
       /* pull numbers out of each actual pair */
-      var firstActual = pairs[i][0];
-      var secondActual = pairs[i][1];
+      var firstActual = pairs[i][0],
+          secondActual = pairs[i][1];
 
       if((attemptFirstSelection == firstActual || attemptFirstSelection == secondActual) && (attemptSecondSelection == firstActual || attemptSecondSelection == secondActual)) {
         /* We have a match! */
         console.log('pair ' + i + ' is a match!!!');
+        match = true;
         break;
       } else {
         /* not a match */
       }
-
+    }
+    /* call appropriate function weather the selection was correct or not */
+    if(match) {
+      handleMatch();
+    } else {
+      handleNoMatch();
     }
     selectedCardCount = 0;
-    checkMatch();
   }
 }
+
+function handleMatch() {
+  console.log('MATCH!!!');
+  checkMatch();
+}
+
+function handleNoMatch() {
+  console.log('no match :(');
+  checkMatch();
+}
+
+
+
 
 /* no logic here yet, but eventually will check for matches */
 function checkMatch() {
   console.log('current match attempt: ' + currentPairAttempt);
-
-
-
-
-
-
   // clear selected pair array
   currentPairAttempt = [];
   // flip cards back over
