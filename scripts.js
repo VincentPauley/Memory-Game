@@ -96,7 +96,25 @@ $('.card').on('click', function() {
 
 function handleSelectedCount() {
   if(selectedCardCount == 2) {
-    /* log out value of array */
+    /* pull out numbers from the attempt array */
+    var attemptFirstSelection = currentPairAttempt[0],
+        attemptSecondSelection = currentPairAttempt[1];
+
+    /* check attempt pair against the matches array */
+    for(i=0;i<pairs.length;i++) {
+      /* pull numbers out of each actual pair */
+      var firstActual = pairs[i][0];
+      var secondActual = pairs[i][1];
+
+      if((attemptFirstSelection == firstActual || attemptFirstSelection == secondActual) && (attemptSecondSelection == firstActual || attemptSecondSelection == secondActual)) {
+        /* We have a match! */
+        console.log('pair ' + i + ' is a match!!!');
+        break;
+      } else {
+        /* not a match */
+      }
+
+    }
     selectedCardCount = 0;
     checkMatch();
   }
@@ -105,6 +123,12 @@ function handleSelectedCount() {
 /* no logic here yet, but eventually will check for matches */
 function checkMatch() {
   console.log('current match attempt: ' + currentPairAttempt);
+
+
+
+
+
+
   // clear selected pair array
   currentPairAttempt = [];
   // flip cards back over
